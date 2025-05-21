@@ -17,8 +17,5 @@ workflows:
             - name: Install CocoaPods dependencies
               script: |
                 cd ios && pod install
-            - name: Build unsigned .app for simulator
-              script: | 
-                --simulator
         artifacts:
           - build/ios/iphonesimulator/Runner.app
