@@ -2,9 +2,10 @@ workflows:
     react-native-ios:
         name: React Native iOS
         max_build_duration: 120
-        node: 20.10.0
-        npm: 10.2.3
-        xcode: 16.3
+        environment:
+            node: 20.10.0
+            npm: 10.2.3
+            xcode: 16.3
         cache:
           cache_paths:
             - $HOME/Library/Caches/CocoaPods
