@@ -19,7 +19,7 @@ workflows:
                 cd ios && pod install
             - name: Build the .app
               script: | 
-                xcodebuild
+                xcodebuild clean bild \
                 -workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
                 -scheme "$XCODE_SCHEME"
                 -configuration Debug \
