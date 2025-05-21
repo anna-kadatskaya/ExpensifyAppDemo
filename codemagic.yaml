@@ -19,10 +19,9 @@ workflows:
                 cd ios && pod install
             - name: Build the .app
               script: | 
-                xcode-project build \
+                xcodebuild test \
                 --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
                 --scheme "$XCODE_SCHEME"
-                -sdk iphonesimulator \
                 -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=18.0' \
                 -configuration Debug \
                 CODE_SIGN_IDENTITY="" \
