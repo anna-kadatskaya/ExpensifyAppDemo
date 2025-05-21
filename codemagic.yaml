@@ -3,15 +3,15 @@ workflows:
         name: React Native Android
         max_build_duration: 120
         # instance_type: linux_x2
-        environment:
-          android_signing:
-            - codemagic_keystore
-          vars:
-            PACKAGE_NAME: "io.codemagic.sample.reactnative" # <-- Put your package name here e.g. com.domain.myapp
-          node: 20.10.0
-          npm: 10.2.3
-          java: 17
-          xcode: 15.4
+        #environment:
+        #  android_signing:
+        #    - codemagic_keystore
+        #  vars:
+        #    PACKAGE_NAME: "io.codemagic.sample.reactnative" # <-- Put your package name here e.g. com.domain.myapp
+        #  node: 20.10.0
+        #  npm: 10.2.3
+        #  java: 17
+        #  xcode: 15.4
         # cache:
         #   cache_paths:
         #     - $CM_BUILD_DIR/node_modules
@@ -35,14 +35,14 @@ workflows:
         # instance_type: mac_mini_m2
         # integrations:
         #   app_store_connect: codemagic
-        environment:
-          ios_signing:
-            distribution_type: app_store
-            bundle_identifier: io.cm.expensify.chat
-          vars:
-            XCODE_WORKSPACE: "NewExpensify.xcworkspace" # <-- Put the name of your Xcode workspace here
-            XCODE_SCHEME: "NewExpensify" # <-- Put the name of your Xcode scheme here
-            APP_ID: 1555555551 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
+        #environment:
+        #  ios_signing:
+        #    distribution_type: app_store
+        #    bundle_identifier: io.cm.expensify.chat
+        #  vars:
+        #    XCODE_WORKSPACE: "NewExpensify.xcworkspace" # <-- Put the name of your Xcode workspace here
+        #    XCODE_SCHEME: "NewExpensify" # <-- Put the name of your Xcode scheme here
+        #    APP_ID: 1555555551 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
           node: 20.10.0
           npm: 10.2.3
           xcode: 16.2
@@ -66,21 +66,25 @@ workflows:
             #     PLIST=$CM_BUILD_DIR/$XCODE_SCHEME/Info.plist
             #     PLIST_BUDDY=/usr/libexec/PlistBuddy
             #     $PLIST_BUDDY -c "Add :ITSAppUsesNonExemptEncryption bool false" $PLIST
-            - name: Set up code signing settings on Xcode project
-              script: |
-                xcode-project use-profiles --project=$CM_BUILD_DIR/ios/NewExpensify.xcodeproj
+            #- name: Set up code signing settings on Xcode project
+            #  script: |
+            #    xcode-project use-profiles --project=$CM_BUILD_DIR/ios/NewExpensify.xcodeproj
             # - name: Increment build number
             #   script: |
             #     cd $CM_BUILD_DIR/ios
             #     LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
             #     agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-            - name: Build ipa for distribution
-              script: |
-                xcode-project build-ipa \
-                  --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
-                  --scheme "$XCODE_SCHEME"
+            #- name: Build ipa for distribution
+            #  script: |
+            #    xcode-project build-ipa \
+            #      --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+            #      --scheme "$XCODE_SCHEME"
+            - name: Build unsigned .app for simulator
+                script: flutter build ios --simulator
+    artifacts:
+      - build/ios/iphonesimulator/Runner.app
         artifacts:
-            - build/ios/ipa/*.ipa
-            - /tmp/xcodebuild_logs/*.log
+            #- build/ios/ipa/*.ipa
+            #- /tmp/xcodebuild_logs/*.log
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-            - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+            #- $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
