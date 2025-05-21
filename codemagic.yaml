@@ -50,7 +50,8 @@ workflows:
             #      --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
             #      --scheme "$XCODE_SCHEME"
             - name: Build unsigned .app for simulator
-                script: flutter build ios --simulator
+                script: | 
+                --simulator
     artifacts:
       - build/ios/iphonesimulator/Runner.app
         artifacts:
