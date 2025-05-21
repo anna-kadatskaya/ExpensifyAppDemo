@@ -2,23 +2,6 @@ workflows:
     react-native-ios:
         name: React Native iOS
         max_build_duration: 120
-        # instance_type: mac_mini_m2
-        # integrations:
-        #   app_store_connect: codemagic
-        #environment:
-        #  ios_signing:
-        #    distribution_type: app_store
-        #    bundle_identifier: io.cm.expensify.chat
-        #  vars:
-        #    XCODE_WORKSPACE: "NewExpensify.xcworkspace" # <-- Put the name of your Xcode workspace here
-        #    XCODE_SCHEME: "NewExpensify" # <-- Put the name of your Xcode scheme here
-        #    APP_ID: 1555555551 # <-- Put the app id number here. This is found in App Store Connect > App > General > App Information
-        #  node: 20.10.0
-        #  npm: 10.2.3
-        #  xcode: 16.2
-  
-          # xcode: latest
-          # cocoapods: default
         cache:
           cache_paths:
             - $HOME/Library/Caches/CocoaPods
@@ -36,7 +19,4 @@ workflows:
     artifacts:
       - build/ios/iphonesimulator/Runner.app
         artifacts:
-            #- build/ios/ipa/*.ipa
-            #- /tmp/xcodebuild_logs/*.log
             - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
-            #- $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
