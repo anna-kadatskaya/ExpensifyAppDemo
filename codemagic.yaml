@@ -3,9 +3,6 @@ workflows:
         name: React Native iOS
         max_build_duration: 120
         environment:
-          ios_signing:
-            distribution_type: development
-            bundle_identifier: io.cm.expensify.chat
           vars:
             XCODE_WORKSPACE: "NewExpensify.xcworkspace" # <-- Put the name of your Xcode workspace here
             XCODE_SCHEME: "NewExpensify" # <-- Put the name of your Xcode scheme here
