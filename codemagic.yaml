@@ -16,7 +16,5 @@ workflows:
             - name: Build unsigned .app for simulator
               script: | 
                 --simulator
-    artifacts:
-      - build/ios/iphonesimulator/Runner.app
         artifacts:
-            - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+          - build/ios/iphonesimulator/Runner.app
